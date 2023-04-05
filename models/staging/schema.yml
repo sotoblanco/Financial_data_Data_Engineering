@@ -1,0 +1,72 @@
+version: 2
+
+sources:
+  - name: staging
+    database: dtc-de-course-374821
+    schema: financial_data
+
+    tables:
+      - name: ohlcv
+        description: This table contains the raw OHLCV (Open, High, Low, Close, Volume) data for multiple instruments, with minute-level granularity.
+        columns:
+          - name: time
+            description: The timestamp at which the OHLCV data was recorded.
+            tests:
+              - not_null
+          - name: instrument
+            description: The unique identifier for the instrument (e.g., trading pair) for which the OHLCV data is recorded.
+            tests:
+              - not_null
+          - name: open
+            description: The opening price of the instrument at the beginning of the minute.
+            tests:
+              - not_null
+          - name: high
+            description: The highest price of the instrument during the minute.
+            tests:
+              - not_null
+          - name: low
+            description: The lowest price of the instrument during the minute.
+            tests:
+              - not_null
+          - name: close
+            description: The closing price of the instrument at the end of the minute.
+            tests:
+              - not_null
+          - name: volume
+            description: The total trading volume of the instrument during the minute.
+            tests:
+              - not_null
+
+models:
+  - name: stg_ohlcv
+    description: This model is a staging table that extracts and transforms the raw OHLCV data from the source table, casting the appropriate data types for each column.
+    columns:
+      - name: time
+        description: The timestamp at which the OHLCV data was recorded.
+        tests:
+          - not_null
+      - name: instrument
+        description: The unique identifier for the instrument (e.g., trading pair) for which the OHLCV data is recorded.
+        tests:
+          - not_null
+      - name: open
+        description: The opening price of the instrument at the beginning of the minute.
+        tests:
+          - not_null
+      - name: high
+        description: The highest price of the instrument during the minute.
+        tests:
+          - not_null
+      - name: low
+        description: The lowest price of the instrument during the minute.
+        tests:
+          - not_null
+      - name: close
+        description: The closing price of the instrument at the end of the minute.
+        tests:
+          - not_null
+      - name: volume
+        description: The total trading volume of the instrument during the minute.
+        tests:
+          - not_null
